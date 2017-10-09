@@ -1,0 +1,16 @@
+{
+    "name": "titaniumcodes/middleware-msgpack",
+    "type": "library",
+    "description": "PSR-7 Middleware of msgpack.org",
+    "license": "MIT",
+    "prefer-stable": true,
+    "require": {
+        "ext-msgpack": "*",
+        "slim/slim": "^3.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "TitaniumCodes\\Middleware\\": "src/"
+        }
+    }
+}
