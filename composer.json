@@ -6,7 +6,7 @@
     "prefer-stable": true,
     "require": {
         "ext-msgpack": "*",
-        "slim/slim": "^3.8"
+        "psr/http-message-implementation": "*"
     },
     "autoload": {
         "psr-4": {
