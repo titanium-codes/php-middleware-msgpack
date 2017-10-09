@@ -26,7 +26,7 @@ $config = [
 $app = new \Slim\App($config);
 $app->add(new \TitaniumCodes\Middleware\Msgpack($body, 'application/x-msgpack'));
 $app->get('/', function ($request, $response, $args) use($config) {
-    return $response->write(json_encode($config));
+    return $response->withJson($config);
 });
 $app->run();
 ```

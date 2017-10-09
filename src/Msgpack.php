@@ -42,9 +42,27 @@ class Msgpack
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         $response = $next($request, $response);
-        $this->body->write(msgpack_pack($response->getBody()->__toString()));
+        $data = $this->preprocess($response);
+        $this->body->write(msgpack_pack($data));
         $response = $response->withHeader('Content-Type', $this->contentType)->withBody($this->body);
 
         return $response;
+    }
+
+    /**
+     * Preprocess response body and convert it to array (if available).
+     *
+     * @param ResponseInterface $response
+     *
+     * @return mixed
+     */
+    protected function preprocess(ResponseInterface $response)
+    {
+        $content = $response->getBody()->__toString();
+        if (false === strpos($response->getHeaderLine('Content-Type'), 'json')) {
+            return $content;
+        }
+
+        return json_decode($content, true);
     }
 }
